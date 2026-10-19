@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fff4f8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC:wght@200..900&display=swap" rel="stylesheet">
+<title>Starry Days ✦ 追星行程手帳</title>
+<style>
+:root{--pink:#e99abd;--pink-dark:#b85f89;--pink-pale:#fff0f6;--lav:#e9e1ff;--lav-dark:#8b79c5;--mint:#dff4e9;--mint-dark:#5d9b83;--cream:#fffaf2;--ink:#51485b;--muted:#978d9e;--line:#f0e5ed;--white:#fff;--shadow:0 12px 35px #b88aa51a;--radius:22px}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#fff7fa 0%,#fbf8ff 50%,#f5fcf8 100%);color:var(--ink);font-family:"Chiron GoRound TC",ui-rounded,"PingFang TC","Microsoft JhengHei",system-ui,sans-serif;line-height:1.6}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;transition:transform .15s,filter .15s}button:hover{filter:brightness(.98);transform:translateY(-1px)}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #dcb8f4;outline-offset:2px}
+.app{max-width:1120px;margin:auto;padding:22px 22px 50px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:22px}.brand{display:flex;align-items:center;gap:12px}.logo{display:grid;place-items:center;width:54px;height:54px;border-radius:18px;background:linear-gradient(135deg,#ffd9e9,#e6ddff);font-size:27px;box-shadow:var(--shadow)}.brand h1{font-size:23px;line-height:1.2;margin:0;color:#9e6284}.brand p{margin:5px 0 0;color:var(--muted);font-size:12px;font-weight:600;letter-spacing:3px}.top-actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border-radius:13px;padding:10px 15px;background:var(--pink-pale);color:var(--pink-dark);font-weight:700;font-size:13px}.btn.primary{background:linear-gradient(135deg,#eea8c7,#c9b6f2);color:#fff;box-shadow:0 6px 15px #d99abf33}.btn.soft{background:#f2edff;color:#8170b7}.btn.mint{background:#e5f7ed;color:#568c77}.btn.danger{background:#fff0f0;color:#c46e78}.btn.small{padding:6px 10px;font-size:12px;border-radius:10px}
+.hero{position:relative;overflow:hidden;background:linear-gradient(120deg,#ffe8f1 0%,#f2eaff 58%,#e8f8f0 100%);border:1px solid #fff;border-radius:28px;padding:28px;margin-bottom:20px;box-shadow:var(--shadow)}.hero:after{content:'✦ ♡ ✧';position:absolute;right:22px;top:10px;color:#d79abb88;font-size:22px;letter-spacing:12px}.eyebrow{color:#b16e91;font-size:12px;font-weight:800;letter-spacing:2px}.hero h2{font-size:clamp(24px,3vw,34px);line-height:1.25;margin:7px 0 8px;color:#75576f}.hero p{margin:0;color:#927b91;font-size:14px}.countdown-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.next-name{margin-top:14px;font-size:15px;font-weight:700;color:#8a4f78}.nn-artist{font-weight:900;font-size:clamp(18px,2.4vw,22px);color:#a85883;overflow-wrap:anywhere}.nn-title{font-size:clamp(22px,3.2vw,32px);font-weight:900;line-height:1.3;color:#6b5270;margin:2px 0 12px;overflow-wrap:anywhere}.countdown-head>div:first-child{flex:1 1 280px;min-width:0}.hero-fields{display:flex;flex-wrap:wrap;gap:14px 100px}.hero-fields div{min-width:0}.hero-fields small{display:block;font-size:12px;font-weight:600;color:#8f6f88}.hero-fields b{display:block;font-size:14px;font-weight:700;color:#6b5270;overflow-wrap:anywhere}
+@media(max-width:520px){.hero-fields{gap:12px 28px}}.timer{display:grid;grid-template-columns:repeat(4,minmax(60px,1fr));gap:10px;margin-top:22px;max-width:680px}.time-unit{background:#ffffffc9;border:1px solid #fff;border-radius:18px;padding:13px 8px;text-align:center;box-shadow:0 5px 16px #b88aa511}.time-unit strong{display:block;font-size:clamp(24px,4vw,38px);line-height:1.2;color:#a85883;font-variant-numeric:tabular-nums}.time-unit span{font-size:11px;color:#a17c98;letter-spacing:1px}.no-next{padding:16px;background:#ffffffa6;border-radius:16px;margin-top:16px;color:#9b7e97;font-size:13px}
+.nav{display:flex;gap:8px;padding:5px 2px 16px;margin-bottom:3px}.nav button{flex:1;background:#ffffffbd;border:1px solid #fff;color:#91839a;padding:12px 14px;border-radius:15px;font-size:14px;font-weight:750}.nav button.active{background:#e9dcff;color:#7765ad;box-shadow:0 5px 12px #d4c5f433}.section{display:none;animation:fade .25s ease}.section.active{display:block}@keyframes fade{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin:10px 0 16px}.section-head h2{margin:0;font-size:22px;color:#765c79}.section-head p{margin:4px 0 0;font-size:13px;color:var(--muted)}.grid{display:grid;gap:15px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin:16px 0 20px}.stat,.panel,.ticket{background:#ffffffdc;border:1px solid #fff;border-radius:var(--radius);box-shadow:var(--shadow)}.stat{padding:17px 18px;position:relative;overflow:hidden}.stat .icon{font-size:22px}.stat small{display:block;color:var(--muted);font-size:12px;margin-top:6px}.stat strong{display:block;font-size:25px;color:#78668a;line-height:1.35}.stat em{position:absolute;right:13px;top:10px;font-style:normal;font-size:22px;opacity:.25}.panel{padding:20px}.panel-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px;gap:10px}.panel-title h3{font-size:16px;margin:0;color:#78627d}.muted{color:var(--muted)}.progress{height:9px;border-radius:10px;background:#f2eaf3;overflow:hidden}.progress span{height:100%;display:block;background:linear-gradient(90deg,#f1b0cd,#c4b3f2,#a9dfc7);border-radius:10px;transition:width .3s}.progress-label{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin:8px 0}
+.ticket-list{display:grid;gap:18px}.ticket{display:grid;grid-template-columns:132px minmax(0,1fr);overflow:hidden;position:relative}.ticket-stub{position:relative;background:linear-gradient(160deg,#f2c3d8,#d8c9fa);color:#fff;padding:18px 10px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;border-right:2px dashed #fff}.ticket-stub:before,.ticket-stub:after{content:"";position:absolute;right:-10px;width:18px;height:18px;border-radius:50%;background:#faf7fb}.ticket-stub:before{top:-9px}.ticket-stub:after{bottom:-9px}.ticket-stub .month{font-size:12px;letter-spacing:2px}.ticket-stub .day{font-size:46px;font-weight:900;line-height:1.15}.ticket-stub .weekday{font-size:12px}.ticket-stub .count{margin-top:12px;background:#ffffff55;border:1px solid #ffffff66;border-radius:12px;padding:6px 8px;font-size:12px;line-height:1.4}.ticket-stub.done{background:linear-gradient(160deg,#b9dcca,#b9b0e9)}.ticket-content{padding:19px 20px;min-width:0}.ticket-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}.ticket-title{margin:0;color:#765b7b;font-size:20px;overflow-wrap:anywhere}.ticket-sub{margin:4px 0 12px;color:var(--muted);font-size:12px}.ticket-actions{display:flex;gap:6px;flex-wrap:wrap}.ticket-actions .btn{padding:6px 9px;font-size:11px}.ticket-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}.ticket-box{background:#fff9fc;border:1px solid #f7eaf2;border-radius:16px;padding:13px;min-width:0}.ticket-box h4{margin:0 0 9px;font-size:13px;color:#8c6b8b;display:flex;justify-content:space-between;gap:6px}.check-list,.cost-list{list-style:none;margin:0;padding:0}.check-list li,.cost-list li{display:flex;align-items:center;gap:7px;border-bottom:1px solid #f3e9f1;padding:6px 0;font-size:12px;min-width:0}.check-list li:last-child,.cost-list li:last-child{border-bottom:0}.check-list input{accent-color:#b7a4e8;flex-shrink:0}.check-list .task-text{flex:1;overflow-wrap:anywhere}.check-list li.done .task-text{text-decoration:line-through;color:#b4a8b6}.cost-list li span{flex:1;overflow-wrap:anywhere}.cost-list li b{white-space:nowrap;font-size:12px;color:#816c8c}.icon-btn{background:transparent;color:#b6a5b5;padding:1px 4px;font-size:16px}.icon-btn:hover{color:#c46e78}.mini-form{display:flex;gap:6px;margin-top:9px}.mini-form input,.mini-form select{min-width:0;width:100%;padding:8px 9px;border:1px solid #eee2ed;border-radius:10px;background:#fff;color:var(--ink);font-size:12px}.mini-form .btn{padding:7px 10px;white-space:nowrap}.ticket-total{font-size:12px;color:#a85f87;font-weight:800;margin-top:8px}.ticket-progress{margin-top:8px}.ticket-progress .progress{height:6px}.ticket-progress small{font-size:10px;color:var(--muted)}.empty{border:1px dashed #e8d9e6;border-radius:18px;text-align:center;padding:36px 15px;color:var(--muted);font-size:13px;background:#fff9fc}.empty b{display:block;font-size:30px;margin-bottom:5px}.form-panel{display:none;margin-bottom:16px}.form-panel.open{display:block}.form-panel h3{margin:0 0 14px;font-size:16px;color:#78627d}.field{display:grid;gap:5px}.field label{font-size:12px;font-weight:750;color:#8c7894}.field input,.field select,.field textarea{width:100%;padding:10px 12px;border:1px solid #eee2ed;border-radius:12px;background:#fffdfd;color:var(--ink);font-size:13px;min-width:0}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.field.full{grid-column:1/-1}.form-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}.footer{text-align:center;color:#b1a2b1;font-size:11px;padding:28px 0 0}.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#6d5b78;color:#fff;padding:11px 18px;border-radius:14px;box-shadow:var(--shadow);font-size:13px;z-index:20;transition:.25s;max-width:90vw}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:800px){.app{padding:15px 13px 35px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.ticket{grid-template-columns:100px minmax(0,1fr)}.ticket-cols{grid-template-columns:1fr}.ticket-content{padding:14px}.ticket-stub .day{font-size:38px}.topbar{align-items:flex-start}}@media(max-width:520px){.topbar{flex-direction:column}.top-actions{width:100%}.top-actions .btn{flex:1}.hero{padding:20px 17px}.timer{gap:6px}.time-unit{padding:11px 4px;border-radius:13px}.time-unit strong{font-size:25px}.nav{gap:6px}.nav button{padding:10px 8px;font-size:12px}.section-head{align-items:flex-start;flex-direction:column}.ticket{grid-template-columns:1fr}.ticket-stub{border-right:0;border-bottom:2px dashed #fff;flex-direction:row;gap:9px;padding:12px}.ticket-stub:before,.ticket-stub:after{display:none}.ticket-stub .day{font-size:28px}.ticket-stub .count{margin:0 0 0 auto}.ticket-stub .month{font-size:11px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.stat{padding:14px}.stat strong{font-size:22px}}
+.hidden{display:none!important}.pill{display:inline-block;background:#f2edff;color:#8170b7;border-radius:20px;padding:1px 9px;font-size:11px;font-weight:700}
+.charts{grid-template-columns:repeat(2,minmax(0,1fr))}.chart-sub{margin:-6px 0 10px;font-size:12px;color:var(--muted)}.bar-row{display:grid;grid-template-columns:76px minmax(0,1fr) minmax(54px,auto);gap:8px;align-items:center;font-size:12px;margin:8px 0}.bar-row span{overflow-wrap:anywhere}.bar-row b{color:#78668a;text-align:right;white-space:nowrap}.bar-track{height:12px;background:#f2eaf3;border-radius:8px;overflow:hidden}.bar-fill{height:100%;border-radius:8px;background:linear-gradient(90deg,#f1b0cd,#c4b3f2)}.vchart{display:flex;align-items:flex-end;gap:6px;height:150px;padding-top:6px}.vcol{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:3px;font-size:11px;color:var(--muted)}.vnum{font-weight:800;color:#78668a;min-height:14px}.vbar{width:100%;max-width:34px;border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,#c4b3f2,#f1b0cd)}.vbar.zero{background:#f2eaf3}.vbar.now{background:linear-gradient(180deg,#a9dfc7,#c4b3f2)}.ticket-info{display:grid;gap:4px;margin:8px 0 12px;font-size:13px;color:#7a6a82}.ticket-info div{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.ticket-info i{font-style:normal;width:20px;text-align:center}.ticket-info .t-name{font-weight:800;color:#6b5270;font-size:14px}
+@media(max-width:800px){.charts{grid-template-columns:1fr}}
+.ticket-top{align-items:center;padding-bottom:10px;margin-bottom:12px;border-bottom:1px dashed #e3d3e0}.ticket-artist{font-weight:900;font-size:clamp(18px,2.2vw,21px);color:#a85883;overflow-wrap:anywhere}.ticket-title{font-size:23px;font-weight:900;line-height:1.3;margin:0 0 12px;color:#6b5270}.ticket-fields{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:12px;margin-bottom:14px}.tf{min-width:0}.tf small{display:block;font-size:12px;font-weight:600;color:#8f7f98}.tf b{display:block;font-size:14px;color:#6b5270;overflow-wrap:anywhere}
+@media(max-width:520px){.ticket-fields{grid-template-columns:1fr 1fr}.tf:first-child{grid-column:1/-1}.ticket-title{font-size:20px}}
+.donut-wrap{display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap;padding:4px 0 8px}.donut-wrap svg{width:182px;height:182px;flex:none}.legend{display:grid;grid-template-columns:12px auto auto auto;column-gap:12px;row-gap:14px;align-items:center;flex:0 1 auto;min-width:0;font-size:14px;font-variant-numeric:tabular-nums}.legend span{display:contents}.legend i{width:12px;height:12px;border-radius:50%;flex:none}.legend em{font-style:normal;color:#6b5270;margin-right:20px;overflow-wrap:anywhere}.legend .lv{text-align:right;margin-right:14px}.legend .lp{text-align:right;color:#9a86a6;font-weight:600}.legend b{color:#78668a;white-space:nowrap}
+@media(max-width:520px){.donut-wrap svg{width:min(100%,220px);height:auto}.legend{flex:1 1 100%;justify-content:center}}
+.wide{grid-column:1/-1}.panel-title{flex-wrap:wrap}.cal-nav{display:flex;align-items:center;gap:8px}.cal-nav button{width:32px;height:32px;padding:0 0 3px;border-radius:10px;background:#f2edff;color:#8170b7;font-size:26px;font-weight:700;line-height:1}.cal-nav .cal-today{width:auto;padding:0 12px;font-size:12px;font-weight:700;background:#fff0f6;color:#b85f89}.cal-nav b{min-width:96px;text-align:center;color:#6b5270}
+.cal-month{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}.cal-dow:first-child,.cal-dow:nth-child(7){color:#b85f89}.cal-dow{text-align:center;font-size:12px;font-weight:700;color:#8f7f98;padding-bottom:2px}.cal-day{min-height:70px;min-width:0;padding:6px;display:flex;flex-direction:column;gap:5px;background:#fff9fc;border:1px solid #f3e9f1;border-radius:12px}.cal-day.out{background:none;border-color:transparent}.cal-num{align-self:flex-start;display:flex;align-items:center;justify-content:flex-start;min-width:22px;height:22px;padding-left:3px;font-size:12px;font-weight:700;color:#8f7f98}.cal-day.today{border-color:#e9b6cf}.cal-day.today .cal-num{justify-content:center;width:22px;padding:0;background:#b85f89;color:#fff;border-radius:50%}.cal-chips{display:flex;flex-direction:column;gap:3px;min-width:0}.cal-chip{display:block;width:100%;padding:3px 7px;border-radius:8px;text-align:left;font-size:12px;font-weight:700;color:#5a4262;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cal-chip.past{opacity:.6}.cal-more{align-self:flex-start;padding:0 4px;background:none;font-size:11px;font-weight:700;color:#8f7f98}.cal-info{margin:14px 0 10px;min-height:20px;font-size:13px;color:#8f7f98;overflow-wrap:anywhere}.cal-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#6b5270}.cal-legend span{display:flex;align-items:center;gap:6px}.cal-legend i{width:12px;height:12px;border-radius:4px}
+@media(max-width:520px){.cal-month{gap:4px}.cal-day{min-height:54px;padding:4px}.cal-chips{flex-direction:row;flex-wrap:wrap;gap:4px}.cal-chip{width:11px;height:11px;padding:0;border-radius:50%;font-size:0}.cal-nav b{min-width:84px}}
+.modal{position:fixed;inset:0;z-index:30;display:none;place-items:center;padding:20px;background:#51485b59;backdrop-filter:blur(4px)}.modal.open{display:grid}.modal.open .modal-box{animation:pop .22s ease}@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:none}}
+.modal-box{width:min(100%,380px);padding:28px 24px 22px;text-align:center;background:linear-gradient(160deg,#fff 40%,#fff4f9);border:1px solid #fff;border-radius:26px;box-shadow:0 20px 60px #7d587a40}.modal-icon{display:grid;place-items:center;width:58px;height:58px;margin:0 auto 14px;border-radius:50%;background:linear-gradient(135deg,#ffd9e9,#e6ddff);color:#a85883;font-size:26px}.modal-box h3{margin:0 0 8px;font-size:19px;font-weight:900;color:#6b5270}.modal-msg{margin:0 0 6px;font-size:15px;font-weight:700;color:#7a6681;overflow-wrap:anywhere}.modal-note{margin:0 0 20px;font-size:13px;color:#978d9e}.modal-actions{display:flex;gap:10px;justify-content:center}.modal-actions .btn{flex:1;max-width:150px;padding:11px 14px;font-size:14px}.btn.confirm-danger{background:#c4607f;color:#fff}.btn.confirm-soft{background:linear-gradient(135deg,#eea8c7,#c9b6f2);color:#fff}
+body.modal-open{overflow:hidden}@media(prefers-reduced-motion:reduce){.modal.open .modal-box{animation:none}}
+.today-pill{display:inline-block;margin-bottom:10px;padding:4px 13px;border-radius:999px;background:linear-gradient(135deg,#ffe3ef,#ece4ff);color:#8a5a86;font-size:12px;font-weight:700;letter-spacing:.02em}
+.ticket-wrap{filter:drop-shadow(0 12px 17px #b88aa538)}
+.ticket{--stub:132px;border:0;box-shadow:none;-webkit-mask:radial-gradient(circle at var(--stub) 0,#0000 8.5px,#000 9px),radial-gradient(circle at var(--stub) 100%,#0000 8.5px,#000 9px);-webkit-mask-composite:source-in;mask:radial-gradient(circle at var(--stub) 0,#0000 8.5px,#000 9px),radial-gradient(circle at var(--stub) 100%,#0000 8.5px,#000 9px);mask-composite:intersect}
+.ticket-stub:before,.ticket-stub:after{display:none}
+@media(max-width:800px){.ticket{--stub:100px}}
+@media(max-width:520px){.ticket{-webkit-mask:none;mask:none}}
+.ticket-cols{margin-top:12px}.ticket-cols[hidden]{display:none}.ticket-top{padding-bottom:8px;margin-bottom:10px}.ticket-title{margin-bottom:10px}.ticket-fields{margin-bottom:10px}
+.ticket-summary{display:flex;align-items:center;flex-wrap:wrap;gap:8px}.ts-chip{padding:4px 11px;border-radius:12px;background:#fff9fc;border:1px solid #f7eaf2;color:#8c6b8b;font-size:12px;font-weight:700}.ts-toggle{margin-left:auto;display:inline-flex;align-items:center;gap:4px;padding:5px 10px;border-radius:12px;background:none;color:#a85883;font-size:12px;font-weight:700}.ts-toggle i{font-style:normal;font-size:15px;line-height:1;transition:transform .2s}.ts-toggle[aria-expanded="true"] i{transform:rotate(180deg)}.ts-toggle:hover{background:var(--pink-pale)}
+@media(prefers-reduced-motion:reduce){.ts-toggle i{transition:none}}
+.ticket-summary.open .ts-chip{display:none}
+.tdot{display:inline-block;width:12px;height:12px;margin-right:6px;border-radius:4px;vertical-align:-1px}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <div class="brand"><div class="logo">♥</div><div><h1>Starry Days <span style="font-size:17px">✦</span></h1><p>追星行程手帳</p></div></div>
+  <div class="top-actions"><button class="btn soft" id="exportBtn">⇩ 匯出備份</button><button class="btn" id="resetBtn">↻ 重設示範資料</button></div>
+</header>
+<section class="hero">
+  <div class="countdown-head"><div><div class="eyebrow">✧ LITTLE MOMENTS, BIG MEMORIES ✧</div><h2>下一場見面倒數 ♡</h2><p>每一場相遇，都值得好好期待。</p><div class="next-name" id="nextEventName">正在尋找下一場期待……</div></div><div style="font-size:58px;filter:drop-shadow(0 8px 6px #d5a2bd44)" aria-hidden="true">🐰</div></div>
+  <div id="timer" class="timer"><div class="time-unit"><strong>--</strong><span>DAYS</span></div><div class="time-unit"><strong>--</strong><span>HOURS</span></div><div class="time-unit"><strong>--</strong><span>MINS</span></div><div class="time-unit"><strong>--</strong><span>SECS</span></div></div>
+  <div id="noNext" class="no-next hidden">目前沒有期待中的活動，新增一場活動，讓倒數開始吧 ♡</div>
+</section>
+<nav class="nav" aria-label="主要導覽"><button class="active" data-page="home">₊˚ 我的手帳</button><button data-page="planned">♡ 期待中</button><button data-page="attended">✧ 已結束</button></nav>
+<main>
+  <div id="eventFormPanel" class="panel form-panel">
+    <h3 id="formTitle">新增一場期待 ♡</h3>
+    <form id="eventForm"><input type="hidden" id="eventId">
+      <div class="form-grid">
+        <div class="field"><label for="artist">藝人名稱 *</label><input id="artist" required maxlength="80" placeholder="例如：Bruno Mars"></div>
+        <div class="field"><label for="eventName">活動名稱 *</label><input id="eventName" required maxlength="100" placeholder="例如：The Romantic Tour"></div>
+        <div class="field"><label for="eventDate">活動日期 *</label><input id="eventDate" type="date" required></div>
+        <div class="field"><label for="eventTime">活動時間</label><input id="eventTime" type="time"></div>
+        <div class="field"><label for="venue">地點</label><input id="venue" maxlength="100" placeholder="例如：台北大巨蛋"></div>
+        <div class="field"><label for="eventType">活動類型</label><select id="eventType"><option>演唱會</option><option>粉絲見面會</option><option>音樂祭</option><option>簽售／快閃</option><option>其他活動</option></select></div>
+        <div class="field"><label for="ticketPrice">門票金額（NT$）</label><input id="ticketPrice" type="number" min="0" max="1000000" step="1" value="0"></div>
+      </div>
+      <div class="form-actions"><button type="button" class="btn" id="cancelForm">取消</button><button class="btn primary" type="submit">保存活動</button></div>
+    </form>
+  </div>
+<section class="section active" id="page-home">
+  <div class="section-head"><div><span class="today-pill" id="todayText"></span><h2>我的追星小宇宙 ₊˚</h2><p>今天也要為喜歡的事物閃閃發光 ♡</p></div><button class="btn primary" data-open-form>＋ 新增活動</button></div>
+  <div class="grid stats">
+    <div class="stat"><span class="icon">✿</span><strong id="statTotal">0</strong><small>追星活動總數</small></div>
+    <div class="stat"><span class="icon">♡</span><strong id="statPlanned">0</strong><small>期待中的活動</small></div>
+    <div class="stat"><span class="icon">★</span><strong id="statSpent">NT$ 0</strong><small>追星總花費</small></div>
+    <div class="stat"><span class="icon">✓</span><strong id="statTasks">0%</strong><small>準備清單完成率</small></div>
+  </div>
+  <div class="grid charts" id="charts"></div>
+</section>
+<section class="section" id="page-planned">
+  <div class="section-head"><div><h2>期待中 ♡</h2><p>把每一場期待，都好好準備起來。</p></div><button class="btn primary" data-open-form>＋ 新增活動</button></div>
+  <div id="plannedList" class="ticket-list"></div>
+</section>
+<section class="section" id="page-attended">
+  <div class="section-head"><div><h2>已結束 ✧</h2><p>那些閃閃發光的日子，都值得被記下來。</p></div><button class="btn primary" data-open-form>＋ 新增活動</button></div>
+  <div id="attendedList" class="ticket-list"></div>
+</section>
+</main>
+<footer class="footer">Made with ♡ for every little moment · Starry Days</footer>
+</div>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalMsg"><div class="modal-box"><div class="modal-icon" id="modalIcon" aria-hidden="true">♡</div><h3 id="modalTitle"></h3><p id="modalMsg" class="modal-msg"></p><p id="modalNote" class="modal-note"></p><div class="modal-actions"><button type="button" class="btn" id="modalCancel">先不要</button><button type="button" class="btn" id="modalOk">確定</button></div></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+const STORE='starryDaysSimple_v1';
+const DEFAULT_CHECKLIST=['確認票券／電子票截圖','規劃交通方式','準備手燈與應援物','準備行動電源','確認活動時間與入場規定'];
+const money=n=>'NT$ '+Number(n||0).toLocaleString('zh-TW');
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const localDateString=(d)=>{const x=new Date(d);return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`};
+function dateOffset(days){const d=new Date();d.setDate(d.getDate()+days);return localDateString(d)}
+const monthDay=d=>{const n=new Date();return localDateString(new Date(n.getFullYear(),n.getMonth(),d))};
+function sampleData(){
+const T=(base,n,done)=>DEFAULT_CHECKLIST.slice(0,n).map((text,i)=>({id:base+i,text,done:done(i)}));
+return [
+{id:101,artist:'Bruno Mars',name:'The Romantic Tour',date:'2027-05-01',time:'18:45',venue:'世運主場館',type:'演唱會',ticket:5800,tasks:T(110,5,i=>i===0),costs:[{id:120,name:'門票',amount:5800},{id:121,name:'交通',amount:420}]},
+{id:104,artist:'MAMAMOO',name:'2026 WORLD TOUR ＜4WARD＞ in TAIPEI',date:'2026-11-28',time:'18:00',venue:'臺北小巨蛋',type:'演唱會',ticket:4800,tasks:T(410,5,i=>i<2),costs:[{id:420,name:'門票',amount:4800}]},
+{id:102,artist:'夢幻舞台',name:'夢幻之夜 Fan Party',date:'2026-12-12',time:'14:00',venue:'台北流行音樂中心',type:'粉絲見面會',ticket:3200,tasks:T(210,3,()=>false),costs:[{id:220,name:'門票',amount:3200}]},
+{id:105,artist:'人氣樂團',name:'Sunset Music Festival',date:monthDay(3),time:'15:00',venue:'大佳河濱公園',type:'音樂祭',ticket:1800,tasks:T(510,4,i=>i===0),costs:[{id:520,name:'門票',amount:1800},{id:521,name:'交通',amount:150}]},
+{id:103,artist:'Official髭男dism',name:'OFFICIAL HIGE DANDISM ASIA TOUR 2026 - in TAIPEI',date:monthDay(17),time:'19:00',venue:'台北小巨蛋',type:'演唱會',ticket:4800,tasks:T(310,3,()=>true),costs:[{id:320,name:'門票',amount:4800},{id:321,name:'周邊',amount:1200},{id:322,name:'交通',amount:600}]},
+{id:106,artist:'新生代歌手',name:'新專輯簽名會',date:monthDay(5),time:'13:30',venue:'華山文創園區',type:'簽售／快閃',ticket:0,tasks:T(610,3,()=>true),costs:[{id:620,name:'專輯',amount:1200},{id:621,name:'交通',amount:100}]}
+]}
+let events=loadData();
+function loadData(){try{const raw=localStorage.getItem(STORE);if(raw){const parsed=JSON.parse(raw);if(Array.isArray(parsed))return parsed}}catch(e){}return sampleData()}
+function save(){try{localStorage.setItem(STORE,JSON.stringify(events))}catch(e){toast('瀏覽器無法保存資料，請匯出備份。')}}
+function daysUntil(date){const now=new Date();now.setHours(0,0,0,0);const d=new Date(date+'T00:00:00');return Math.round((d-now)/86400000)}
+function eventDateParts(date){const d=new Date(date+'T00:00:00');return {month:d.toLocaleDateString('zh-TW',{month:'short'}),day:d.getDate(),weekday:['日','一','二','三','四','五','六'][d.getDay()]}}
+const isPast=e=>daysUntil(e.date)<0;
+function totalCost(e){return (e.costs||[]).reduce((s,c)=>s+Number(c.amount||0),0)}
+function allTasks(){return events.flatMap(e=>(e.tasks||[]).map(t=>({...t,eventId:e.id,eventArtist:e.artist})))}
+function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(window.__toastTimer);window.__toastTimer=setTimeout(()=>el.classList.remove('show'),2200)}
+let modalOnOk=null,modalPrev=null;
+function openConfirm({title,message='',note='',okText='確定',cancelText='先不要',icon='♡',danger=false,onOk}){
+ const m=document.getElementById('modal'),ok=document.getElementById('modalOk');
+ document.getElementById('modalTitle').textContent=title;document.getElementById('modalMsg').textContent=message;document.getElementById('modalNote').textContent=note;
+ document.getElementById('modalMsg').hidden=!message;document.getElementById('modalNote').hidden=!note;
+ document.getElementById('modalIcon').textContent=icon;document.getElementById('modalCancel').textContent=cancelText;
+ ok.textContent=okText;ok.className='btn '+(danger?'confirm-danger':'confirm-soft');
+ modalOnOk=onOk;modalPrev=document.activeElement;m.classList.add('open');document.body.classList.add('modal-open');document.getElementById('modalCancel').focus()}
+function closeConfirm(){document.getElementById('modal').classList.remove('open');document.body.classList.remove('modal-open');modalOnOk=null;if(modalPrev&&modalPrev.focus)modalPrev.focus();modalPrev=null}
+document.getElementById('modalCancel').addEventListener('click',closeConfirm);
+document.getElementById('modalOk').addEventListener('click',()=>{const f=modalOnOk;closeConfirm();if(f)f()});
+document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeConfirm()});
+document.addEventListener('keydown',e=>{
+ const m=document.getElementById('modal');if(!m.classList.contains('open'))return;
+ if(e.key==='Escape'){closeConfirm();return}
+ if(e.key==='Tab'){const c=document.getElementById('modalCancel'),o=document.getElementById('modalOk');
+  if(e.shiftKey&&document.activeElement===c){e.preventDefault();o.focus()}else if(!e.shiftKey&&document.activeElement===o){e.preventDefault();c.focus()}}});
+function switchPage(page){document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active',s.id==='page-'+page));window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>switchPage(b.dataset.page)));
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>switchPage(b.dataset.go)));
+function updateCountdown(){
+ const now=new Date();const next=events.filter(e=>new Date(e.date+'T'+(e.time||'23:59')+':00')>=now).sort((a,b)=>(a.date+(a.time||'23:59')).localeCompare(b.date+(b.time||'23:59')))[0];
+ const name=document.getElementById('nextEventName'),timer=document.getElementById('timer'),empty=document.getElementById('noNext');
+ if(!next){name.dataset.h='';name.textContent='下一場見面，等你來安排 ♡';timer.classList.add('hidden');empty.classList.remove('hidden');return}
+ timer.classList.remove('hidden');empty.classList.add('hidden');{const wd=['日','一','二','三','四','五','六'][new Date(next.date+'T00:00:00').getDay()];const html=`<div class="nn-artist">${esc(next.artist)}</div><div class="nn-title">${esc(next.name)}</div><div class="hero-fields"><div><small>日期</small><b>${next.date}（${wd}）${next.time?' '+esc(next.time):''}</b></div><div><small>地點</small><b>${esc(next.venue||'地點待確認')}</b></div><div><small>類型</small><b><i class="tdot" style="background:${typeColor(next.type)}"></i>${esc(next.type||'活動')}</b></div></div>`;if(name.dataset.h!==html){name.innerHTML=html;name.dataset.h=html}}
+ const target=new Date(next.date+'T'+(next.time||'23:59')+':00');let diff=Math.max(0,target-now);const days=Math.floor(diff/86400000);diff%=86400000;const hours=Math.floor(diff/3600000);diff%=3600000;const mins=Math.floor(diff/60000);const secs=Math.floor(diff%60000/1000);
+ document.getElementById('timer').innerHTML=[[days,'DAYS'],[hours,'HOURS'],[mins,'MINS'],[secs,'SECS']].map(([n,l])=>`<div class="time-unit"><strong>${String(n).padStart(l==='DAYS'?2:2,'0')}</strong><span>${l}</span></div>`).join('');
+}
+function renderStats(){
+ document.getElementById('statTotal').textContent=events.length;
+ document.getElementById('statPlanned').textContent=events.filter(e=>!isPast(e)).length;
+ document.getElementById('statSpent').textContent=money(events.reduce((s,e)=>s+totalCost(e),0));
+ const tasks=allTasks(),done=tasks.filter(t=>t.done).length;document.getElementById('statTasks').textContent=(tasks.length?Math.round(done/tasks.length*100):0)+'%';
+ {const t=new Date();document.getElementById('todayText').textContent=`${t.getFullYear()} 年 ${t.getMonth()+1} 月 ${t.getDate()} 日（${WD[t.getDay()]}）`}
+}
+const openTickets=new Set();
+function ticket(e){
+ const open=openTickets.has(e.id);
+ const left=daysUntil(e.date),parts=eventDateParts(e.date),isDone=isPast(e);
+ const countText=isDone?'已結束':left===0?'就是今天！':`還有 ${left} 天`;
+ const taskDone=(e.tasks||[]).filter(t=>t.done).length,taskTotal=(e.tasks||[]).length,pct=taskTotal?Math.round(taskDone/taskTotal*100):0;
+ const tasks=(e.tasks||[]).map(t=>`<li class="${t.done?'done':''}"><input type="checkbox" data-action="toggle-task" data-event="${e.id}" data-task="${t.id}" ${t.done?'checked':''} aria-label="完成${esc(t.text)}"><span class="task-text">${esc(t.text)}</span><button class="icon-btn" data-action="delete-task" data-event="${e.id}" data-task="${t.id}" aria-label="刪除任務">×</button></li>`).join('');
+ const costs=(e.costs||[]).map(c=>`<li><span>${esc(c.name)}</span><b>${money(c.amount)}</b><button class="icon-btn" data-action="delete-cost" data-event="${e.id}" data-cost="${c.id}" aria-label="刪除花費">×</button></li>`).join('');
+ return `<div class="ticket-wrap"><article class="ticket"><aside class="ticket-stub ${isDone?'done':''}"><span class="month">${parts.month}</span><span class="day">${String(parts.day).padStart(2,'0')}</span><span class="weekday">星期${parts.weekday}</span><div class="count">${countText}</div></aside><div class="ticket-content">
+ <div class="ticket-top"><span class="ticket-artist">${esc(e.artist)}</span><div class="ticket-actions"><button class="btn soft" data-action="edit-event" data-event="${e.id}">編輯</button><button class="btn danger" data-action="delete-event" data-event="${e.id}">刪除</button></div></div>
+ <h3 class="ticket-title">${esc(e.name)}</h3>
+ <div class="ticket-fields"><div class="tf"><small>日期</small><b>${e.date}（${parts.weekday}）${e.time?' '+esc(e.time):''}</b></div><div class="tf"><small>地點</small><b>${esc(e.venue||'地點待確認')}</b></div><div class="tf"><small>類型</small><b><i class="tdot" style="background:${typeColor(e.type)}"></i>${esc(e.type||'活動')}</b></div></div>
+ <div class="ticket-summary${open?' open':''}"><span class="ts-chip">♡ 準備清單 ${taskDone}/${taskTotal}</span><span class="ts-chip">✧ 花費 ${money(totalCost(e))}</span><button type="button" class="ts-toggle" data-action="toggle-details" data-event="${e.id}" aria-expanded="${open}" aria-controls="details-${e.id}"><span class="ts-label">${open?'收合':'展開'}</span><i aria-hidden="true">⌄</i></button></div>
+ <div class="ticket-cols" id="details-${e.id}"${open?'':' hidden'}><section class="ticket-box"><h4>♡ 準備清單 <span>${taskDone}/${taskTotal}</span></h4><div class="ticket-progress"><div class="progress"><span style="width:${pct}%"></span></div><small>完成 ${pct}%</small></div><ul class="check-list">${tasks||'<li class="muted">還沒有準備項目</li>'}</ul><form class="mini-form" data-form="task" data-event="${e.id}"><input name="task" maxlength="100" placeholder="新增準備事項…" required><button class="btn small" type="submit">＋</button></form></section>
+ <section class="ticket-box"><h4>✧ 花費紀錄 <span>${(e.costs||[]).length} 筆</span></h4><ul class="cost-list">${costs||'<li class="muted">還沒有花費紀錄</li>'}</ul><form class="mini-form" data-form="cost" data-event="${e.id}"><input name="costName" maxlength="40" placeholder="項目" required><input name="amount" type="number" min="0" max="10000000" step="1" placeholder="$ 金額" required style="max-width:95px"><button class="btn small" type="submit">＋</button></form><div class="ticket-total">合計 ${money(totalCost(e))}</div></section></div></div></article></div>`
+}
+function renderLists(){
+ const planned=events.filter(e=>!isPast(e)).sort((a,b)=>(a.date+(a.time||'')).localeCompare(b.date+(b.time||'')));
+ const attended=events.filter(e=>isPast(e)).sort((a,b)=>b.date.localeCompare(a.date));
+ document.getElementById('plannedList').innerHTML=planned.length?planned.map(ticket).join(''):'<div class="empty"><b>♡</b>目前沒有期待中的活動。<br>新增一場活動，開始倒數見面的日子吧！</div>';
+ document.getElementById('attendedList').innerHTML=attended.length?attended.map(ticket).join(''):'<div class="empty"><b>✿</b>還沒有已結束的活動。<br>活動日期一過，就會自動出現在這裡。</div>';
+}
+const PALETTE=['#efb3cf','#c7b8f0','#a9dfca','#f2d48e','#f2b7a8','#b7d8ee'];
+function donut(entries,fmt,aria,colors){
+ const total=entries.reduce((s,x)=>s+x[1],0),R=77,W=38,C=2*Math.PI*R,gap=entries.length>1?3:0,col=i=>(colors&&colors[i])||PALETTE[i%PALETTE.length];
+ let off=0,rings='';
+ entries.forEach(([name,v],i)=>{const len=v/total*C;rings+=`<circle cx="100" cy="100" r="${R}" fill="none" stroke="${col(i)}" stroke-width="${W}" stroke-dasharray="${Math.max(len-gap,1)} ${C}" stroke-dashoffset="${-off}" transform="rotate(-90 100 100)"/>`;off+=len});
+ const legend=entries.map(([name,v],i)=>`<span><i style="background:${col(i)}"></i><em>${esc(name)}</em><b class="lv">${fmt(v)[0]}</b><b class="lp">${fmt(v)[1]}</b></span>`).join('');
+ return `<div class="donut-wrap"><svg viewBox="0 0 200 200" role="img" aria-label="${aria}">${rings}</svg><div class="legend">${legend}</div></div>`}
+const TYPE_COLORS={'演唱會':'#efb3cf','粉絲見面會':'#c7b8f0','音樂祭':'#a9dfca','簽售／快閃':'#f2d48e','其他活動':'#f2b7a8'};
+const typeColor=t=>TYPE_COLORS[t]||'#b7d8ee';
+const WD=['日','一','二','三','四','五','六'];
+let calY=new Date().getFullYear(),calM=new Date().getMonth();
+function calendarPanel(){
+ const y=calY,m=calM,off=new Date(y,m,1).getDay(),dim=new Date(y,m+1,0).getDate(),rows=Math.ceil((off+dim)/7);
+ const byDate={};events.forEach(e=>{(byDate[e.date]=byDate[e.date]||[]).push(e)});
+ const today=localDateString(new Date());let cells='',count=0;
+ for(let i=0;i<rows*7;i++){
+  const d=i-off+1;if(d<1||d>dim){cells+='<div class="cal-day out"></div>';continue}
+  const ds=localDateString(new Date(y,m,d)),list=(byDate[ds]||[]).slice().sort((a,b)=>(a.time||'').localeCompare(b.time||''));count+=list.length;
+  const chips=list.slice(0,2).map(e=>{const tip=e.artist+'｜'+e.name;return `<button type="button" class="cal-chip${ds<today?' past':''}" style="background:${typeColor(e.type)}" data-cal-day="${ds}" data-cal-ev="${e.id}" title="${esc(tip)}" aria-label="${esc(ds+' '+tip)}">${esc(e.artist)}</button>`}).join('')+(list.length>2?`<button type="button" class="cal-more" data-cal-day="${ds}" aria-label="${ds} 還有 ${list.length-2} 場">+${list.length-2}</button>`:'');
+  cells+=`<div class="cal-day${ds===today?' today':''}"><span class="cal-num">${d}</span><div class="cal-chips">${chips}</div></div>`}
+ const used=[...new Set(events.map(e=>e.type||'其他活動'))];
+ const legend=used.map(t=>`<span><i style="background:${typeColor(t)}"></i>${esc(t)}</span>`).join('');
+ return `<section class="panel wide"><div class="panel-title"><h3>☾ 追星月曆</h3><div class="cal-nav"><button type="button" data-cal-nav="-1" aria-label="上個月">‹</button><b>${y} 年 ${m+1} 月</b><button type="button" data-cal-nav="1" aria-label="下個月">›</button><button type="button" class="cal-today" data-cal-today>今天</button></div></div>
+ <div class="cal-month">${WD.map(w=>`<div class="cal-dow">${w}</div>`).join('')}${cells}</div>
+ <p id="calInfo" class="cal-info">${count?`這個月共 ${count} 場。點一下活動標籤，查看詳細資訊。`:'這個月還沒有活動。'}</p><div class="cal-legend">${legend}</div></section>`}
+function showCalInfo(ds,id){
+ const list=events.filter(e=>e.date===ds&&(!id||String(e.id)===id)),el=document.getElementById('calInfo');if(!el||!list.length)return;
+ el.textContent=`${ds}（${WD[new Date(ds+'T00:00:00').getDay()]}）　`+list.map(e=>[e.artist,e.name,e.time,e.venue].filter(Boolean).join('｜')).join('　／　')}
+document.addEventListener('click',e=>{
+ const nav=e.target.closest('[data-cal-nav]');
+ if(nav){const d=new Date(calY,calM+Number(nav.dataset.calNav),1);calY=d.getFullYear();calM=d.getMonth();renderCharts();return}
+ if(e.target.closest('[data-cal-today]')){const d=new Date();calY=d.getFullYear();calM=d.getMonth();renderCharts();return}
+ const c=e.target.closest('[data-cal-day]');if(c)showCalInfo(c.dataset.calDay,c.dataset.calEv)});
+function barRows(entries,fmt){const max=Math.max(...entries.map(x=>x[1]),1);return entries.map(([l,v])=>`<div class="bar-row"><span>${esc(l)}</span><div class="bar-track"><div class="bar-fill" style="width:${Math.max(v/max*100,3)}%"></div></div><b>${fmt(v)}</b></div>`).join('')}
+function chartPanel(title,sub,body){return `<section class="panel"><div class="panel-title"><h3>${title}</h3></div>${sub?`<p class="chart-sub">${sub}</p>`:''}${body}</section>`}
+const NO_DATA='<div class="muted" style="font-size:13px">還沒有資料，新增活動後這裡會出現統計。</div>';
+function tally(list){return list.reduce((m,k)=>(m[k]=(m[k]||0)+1,m),{})}
+function topKey(obj){const k=Object.keys(obj).sort((a,b)=>obj[b]-obj[a])[0];return k}
+function renderCharts(){
+ const box=document.getElementById('charts');if(!box)return;
+ if(!events.length){box.innerHTML=chartPanel('✦ 統計',  '',NO_DATA);return}
+ const n=x=>x+' 場';
+ // 活動類型
+ const types=tally(events.map(e=>e.type||'其他活動'));
+ const typeEntries=Object.entries(types).sort((a,b)=>b[1]-a[1]);
+ const typeHtml=donut(typeEntries,v=>[v+' 場',Math.round(v/events.length*100)+'%'],'活動類型環形圖',typeEntries.map(x=>typeColor(x[0])));
+ // 花費分布
+ const byCost={};events.forEach(e=>(e.costs||[]).forEach(c=>{const k=String(c.name||'其他').trim()||'其他';byCost[k]=(byCost[k]||0)+Number(c.amount||0)}));
+ let costEntries=Object.entries(byCost).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]);const total=costEntries.reduce((s,x)=>s+x[1],0);
+ if(costEntries.length>6){const rest=costEntries.slice(5).reduce((s,x)=>s+x[1],0);costEntries=costEntries.slice(0,5).concat([['其他',rest]])}
+ const costHtml=total?donut(costEntries,v=>[money(v),Math.round(v/total*100)+'%'],'花費去向環形圖'):NO_DATA;
+ box.innerHTML=chartPanel('☁ 活動類型','',typeHtml)+chartPanel('✦ 花費去向','',costHtml)+calendarPanel();
+}
+function inKey(i){const f=i.closest('.mini-form');return (i.closest('.section')?.id||'')+'|'+f.dataset.form+'|'+f.dataset.event+'|'+i.name}
+function render(){
+ const drafts={};document.querySelectorAll('.mini-form input').forEach(i=>{if(i.value)drafts[inKey(i)]=i.value});
+ const a=document.activeElement;let fk=window.__focusKey||null;window.__focusKey=null;
+ if(!fk&&a&&a.matches&&a.matches('.mini-form input'))fk=inKey(a);
+ renderStats();renderLists();renderCharts();updateCountdown();
+ const inputs=[...document.querySelectorAll('.mini-form input')];
+ inputs.forEach(i=>{const k=inKey(i);if(drafts[k]!==undefined)i.value=drafts[k]});
+ if(fk){const t=inputs.find(i=>inKey(i)===fk);if(t)t.focus()}
+}
+function openForm(e=null){
+ const panel=document.getElementById('eventFormPanel'),form=document.getElementById('eventForm');form.reset();document.getElementById('eventId').value=e?e.id:'';document.getElementById('formTitle').textContent=e?'編輯活動 ✎':'新增一場期待 ♡';
+ if(e){document.getElementById('artist').value=e.artist;document.getElementById('eventName').value=e.name;document.getElementById('eventDate').value=e.date;document.getElementById('eventTime').value=e.time||'';document.getElementById('venue').value=e.venue||'';document.getElementById('eventType').value=e.type||'演唱會';document.getElementById('ticketPrice').value=e.ticket||0}
+ panel.classList.add('open');panel.scrollIntoView({behavior:'smooth',block:'start'});document.getElementById('artist').focus();
+}
+document.querySelectorAll('[data-open-form]').forEach(b=>b.addEventListener('click',()=>openForm()));
+document.getElementById('cancelForm').addEventListener('click',()=>document.getElementById('eventFormPanel').classList.remove('open'));
+document.getElementById('eventForm').addEventListener('submit',e=>{
+ e.preventDefault();const id=document.getElementById('eventId').value;
+ const obj={artist:document.getElementById('artist').value.trim(),name:document.getElementById('eventName').value.trim(),date:document.getElementById('eventDate').value,time:document.getElementById('eventTime').value,venue:document.getElementById('venue').value.trim(),type:document.getElementById('eventType').value,ticket:Number(document.getElementById('ticketPrice').value||0)};
+ if(!obj.artist||!obj.name||!obj.date)return;
+ if(id){const old=events.find(x=>x.id===Number(id));if(old){Object.assign(old,obj);const ticketCost=old.costs.find(c=>c.name==='門票');if(ticketCost){if(obj.ticket>0)ticketCost.amount=obj.ticket;else old.costs=old.costs.filter(c=>c!==ticketCost)}else if(obj.ticket>0)old.costs.push({id:Date.now(),name:'門票',amount:obj.ticket})}toast('活動資料已更新 ♡')}
+ else{events.push({id:Date.now(),...obj,tasks:DEFAULT_CHECKLIST.map((text,i)=>({id:Date.now()+i+1,text,done:false})),costs:obj.ticket?[{id:Date.now()+100,name:'門票',amount:obj.ticket}]:[]});toast('新增活動成功 ♡')}
+ save();document.getElementById('eventFormPanel').classList.remove('open');render();if(!id){const target=isPast(obj)?'attended':'planned',cur=document.querySelector('.section.active').id;if(cur!=='page-home'&&cur!=='page-'+target)switchPage(target)}
+});
+function findEvent(id){return events.find(e=>e.id===Number(id))}
+document.addEventListener('click',e=>{
+ const b=e.target.closest('[data-action]');if(!b)return;const ev=findEvent(b.dataset.event);if(!ev)return;const action=b.dataset.action;
+ if(action==='toggle-task')return;
+ if(action==='toggle-details'){const cols=b.closest('.ticket-content').querySelector('.ticket-cols'),show=cols.hidden;cols.hidden=!show;b.setAttribute('aria-expanded',show);b.querySelector('.ts-label').textContent=show?'收合':'展開';b.parentElement.classList.toggle('open',show);show?openTickets.add(ev.id):openTickets.delete(ev.id);return}
+ if(action==='edit-event'){openForm(ev);return}
+ if(action==='delete-event'){openConfirm({title:'要刪除這場活動嗎？',message:`${ev.artist}｜${ev.name}`,note:'準備清單與花費紀錄也會一起刪除，刪除後無法復原。',okText:'刪除',icon:'🗑',danger:true,onOk:()=>{events=events.filter(x=>x.id!==ev.id);save();render();toast('活動已刪除')}});return}
+ if(action==='toggle-task'){ev.tasks.find(t=>t.id===Number(b.dataset.task)).done=b.checked}
+ if(action==='delete-task'){ev.tasks=ev.tasks.filter(t=>t.id!==Number(b.dataset.task));toast('已刪除準備事項')}
+ if(action==='delete-cost'){ev.costs=ev.costs.filter(c=>c.id!==Number(b.dataset.cost));toast('已刪除花費紀錄')}
+ save();render();
+});
+document.addEventListener('change',e=>{const b=e.target.closest('[data-action="toggle-task"]');if(!b)return;const ev=findEvent(b.dataset.event);if(!ev)return;const task=ev.tasks.find(t=>t.id===Number(b.dataset.task));if(!task)return;task.done=b.checked;save();render();});
+document.addEventListener('submit',e=>{
+ const f=e.target.closest('form[data-form]');if(!f)return;e.preventDefault();const ev=findEvent(f.dataset.event);if(!ev)return;const fd=new FormData(f);window.__focusKey=inKey(f.querySelector('input'));
+ if(f.dataset.form==='task'){const text=String(fd.get('task')||'').trim();if(!text)return;ev.tasks.push({id:Date.now(),text,done:false});toast('已加入準備清單 ♡')}
+ else{const name=String(fd.get('costName')||'').trim(),amount=Number(fd.get('amount'));if(!name||!Number.isFinite(amount)||amount<0)return;ev.costs.push({id:Date.now(),name,amount});toast('已加入花費紀錄 ♡')}
+ f.reset();save();render();
+});
+document.getElementById('exportBtn').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(events,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='starry-days-backup.json';a.click();URL.revokeObjectURL(url);toast('備份檔已匯出 ♡')});
+document.getElementById('resetBtn').addEventListener('click',()=>openConfirm({title:'要重設為示範資料嗎？',note:'目前的活動、清單與花費紀錄都會被覆蓋，建議先匯出備份。',okText:'重設',icon:'↻',onOk:()=>{events=sampleData();save();render();toast('示範資料已重設 ♡')}}));
+window.__day=localDateString(new Date());render();setInterval(()=>{updateCountdown();const d=localDateString(new Date());if(d!==window.__day){window.__day=d;render()}},1000);
+</script>
+</body>
+</html>
