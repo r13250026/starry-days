@@ -51,7 +51,8 @@ body.modal-open{overflow:hidden}@media(prefers-reduced-motion:reduce){.modal.ope
 .modal-box h3,.modal-msg,.modal-note{text-wrap:balance}
 @media(max-width:600px){.hero{padding-top:42px}.hero:after{top:12px;right:16px;font-size:18px;letter-spacing:10px}}
 @media(max-width:600px){.mascot{position:absolute;top:60px;right:17px;font-size:46px}.hero-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px}.hero-fields div:first-child{grid-column:1/-1}}
-.nn-title,.ticket-title{word-break:keep-all;overflow-wrap:anywhere}
+.nn-title,.ticket-title{overflow-wrap:anywhere}.nw{white-space:nowrap}
+*{-webkit-tap-highlight-color:transparent}.nav button:active,.btn:active,.ts-toggle:active{transform:scale(.97)}
 </style>
 </head>
 <body>
@@ -110,6 +111,7 @@ const STORE='starryDaysSimple_v1';
 const DEFAULT_CHECKLIST=['確認票券／電子票截圖','規劃交通方式','準備手燈與應援物','準備行動電源','確認活動時間與入場規定'];
 const money=n=>'NT$ '+Number(n||0).toLocaleString('zh-TW');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const breakSafe=s=>String(s??'').split(/(\s+)/).map(t=>t&&!/^\s+$/.test(t)&&t.length<=16?`<span class="nw">${esc(t)}</span>`:esc(t)).join('');
 const localDateString=(d)=>{const x=new Date(d);return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`};
 function dateOffset(days){const d=new Date();d.setDate(d.getDate()+days);return localDateString(d)}
 const monthDay=d=>{const n=new Date();return localDateString(new Date(n.getFullYear(),n.getMonth(),d))};
@@ -156,7 +158,7 @@ function updateCountdown(){
  const now=new Date();const next=events.filter(e=>new Date(e.date+'T'+(e.time||'23:59')+':00')>=now).sort((a,b)=>(a.date+(a.time||'23:59')).localeCompare(b.date+(b.time||'23:59')))[0];
  const name=document.getElementById('nextEventName'),timer=document.getElementById('timer'),empty=document.getElementById('noNext');
  if(!next){name.dataset.h='';name.textContent='下一場見面，等你來安排 ♡';timer.classList.add('hidden');empty.classList.remove('hidden');return}
- timer.classList.remove('hidden');empty.classList.add('hidden');{const wd=['日','一','二','三','四','五','六'][new Date(next.date+'T00:00:00').getDay()];const html=`<div class="nn-artist">${esc(next.artist)}</div><div class="nn-title">${esc(next.name)}</div><div class="hero-fields"><div><small>日期</small><b>${next.date}（${wd}）${next.time?' '+esc(next.time):''}</b></div><div><small>地點</small><b>${esc(next.venue||'地點待確認')}</b></div><div><small>類型</small><b><i class="tdot" style="background:${typeColor(next.type)}"></i>${esc(next.type||'活動')}</b></div></div>`;if(name.dataset.h!==html){name.innerHTML=html;name.dataset.h=html}}
+ timer.classList.remove('hidden');empty.classList.add('hidden');{const wd=['日','一','二','三','四','五','六'][new Date(next.date+'T00:00:00').getDay()];const html=`<div class="nn-artist">${esc(next.artist)}</div><div class="nn-title">${breakSafe(next.name)}</div><div class="hero-fields"><div><small>日期</small><b>${next.date}（${wd}）${next.time?' '+esc(next.time):''}</b></div><div><small>地點</small><b>${esc(next.venue||'地點待確認')}</b></div><div><small>類型</small><b><i class="tdot" style="background:${typeColor(next.type)}"></i>${esc(next.type||'活動')}</b></div></div>`;if(name.dataset.h!==html){name.innerHTML=html;name.dataset.h=html}}
  const target=new Date(next.date+'T'+(next.time||'23:59')+':00');let diff=Math.max(0,target-now);const days=Math.floor(diff/86400000);diff%=86400000;const hours=Math.floor(diff/3600000);diff%=3600000;const mins=Math.floor(diff/60000);const secs=Math.floor(diff%60000/1000);
  document.getElementById('timer').innerHTML=[[days,'DAYS'],[hours,'HOURS'],[mins,'MINS'],[secs,'SECS']].map(([n,l])=>`<div class="time-unit"><strong>${String(n).padStart(l==='DAYS'?2:2,'0')}</strong><span>${l}</span></div>`).join('');
 }
@@ -177,7 +179,7 @@ function ticket(e){
  const costs=(e.costs||[]).map(c=>`<li><span>${esc(c.name)}</span><b>${money(c.amount)}</b><button class="icon-btn" data-action="delete-cost" data-event="${e.id}" data-cost="${c.id}" aria-label="刪除花費">×</button></li>`).join('');
  return `<div class="ticket-wrap"><article class="ticket"><aside class="ticket-stub ${isDone?'done':''}"><span class="month">${parts.month}</span><span class="day">${String(parts.day).padStart(2,'0')}</span><span class="weekday">星期${parts.weekday}</span><div class="count">${countText}</div></aside><div class="ticket-content">
  <div class="ticket-top"><span class="ticket-artist">${esc(e.artist)}</span><div class="ticket-actions"><button class="btn soft" data-action="edit-event" data-event="${e.id}">編輯</button><button class="btn danger" data-action="delete-event" data-event="${e.id}">刪除</button></div></div>
- <h3 class="ticket-title">${esc(e.name)}</h3>
+ <h3 class="ticket-title">${breakSafe(e.name)}</h3>
  <div class="ticket-fields"><div class="tf"><small>日期</small><b>${e.date}（${parts.weekday}）${e.time?' '+esc(e.time):''}</b></div><div class="tf"><small>地點</small><b>${esc(e.venue||'地點待確認')}</b></div><div class="tf"><small>類型</small><b><i class="tdot" style="background:${typeColor(e.type)}"></i>${esc(e.type||'活動')}</b></div></div>
  <div class="ticket-summary${open?' open':''}"><span class="ts-chip">♡ 準備清單 ${taskDone}/${taskTotal}</span><span class="ts-chip">✧ 花費 ${money(totalCost(e))}</span><button type="button" class="ts-toggle" data-action="toggle-details" data-event="${e.id}" aria-expanded="${open}" aria-controls="details-${e.id}"><span class="ts-label">${open?'收合':'展開'}</span><i aria-hidden="true"><svg viewBox="0 0 12 12" width="12" height="12"><path d="M2.5 4.25 6 7.75l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></button></div>
  <div class="ticket-cols" id="details-${e.id}"${open?'':' hidden'}><section class="ticket-box"><h4>♡ 準備清單 <span>${taskDone}/${taskTotal}</span></h4><div class="ticket-progress"><div class="progress"><span style="width:${pct}%"></span></div><small>完成 ${pct}%</small></div><ul class="check-list">${tasks||'<li class="muted">還沒有準備項目</li>'}</ul><form class="mini-form" data-form="task" data-event="${e.id}"><input name="task" maxlength="100" placeholder="新增準備事項…" required><button class="btn small" type="submit">＋</button></form></section>
